@@ -51,7 +51,7 @@ NOTIFY_ERRORS=true
 ADD_COMPRESSION=true
 ```
 
-### Ajoute la encryption des fichiers au moment de la sauvegarde :
+### Ajoute le chiffrement des fichiers au moment de la sauvegarde :
 ```
 ADD_ENCRYPTION=true
 ```
