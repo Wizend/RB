@@ -110,7 +110,7 @@ function encrypt_backups() {
   for file in "${BACKUP_DIR}/backup_"*.tar.gz; do
     local encrypted_file="${file}.enc"
     # Chiffrer les fichiers compressés
-    openssl enc -salt -in "$file" -out "$encrypted_file" || handle_errors "Échec de l'encryption de la sauvegarde : $folder" "$?" # -k "$encryption_key"
+    openssl enc -salt -in "$file" -out "$encrypted_file" || handle_errors "Échec de l'encryption de la sauvegarde : $folder" "$?"
     rm "$file"
     write_log "Sauvegarde chiffrée : ${encrypted_file}"
   done
@@ -392,12 +392,10 @@ function tarzip() {
 # Fonction pour effectuer la rotation des fichiers de journal
 function rotate_logs() {
   local log_files=("$LOG_FILE"*)
-  # Nombre maximum de fichiers de journal à conserver
-  local max_logs=5 
 
   # On teste le nombre de fichier de log dans le dossier de log
-  if [ ${#log_files[@]} -gt $max_logs ]; then
-    local num_logs_to_remove=$(( ${#log_files[@]} - $max_logs ))
+  if [ ${#log_files[@]} -gt $MAX_LOGS ]; then
+    local num_logs_to_remove=$(( ${#log_files[@]} - $MAX_LOGS ))
 
     # Tri des fichiers de journal par date de création (du plus ancien au plus récent)
     IFS=$'\n' log_files=($(ls -rt "$LOG_FILE"*))
@@ -453,7 +451,7 @@ function handle_errors() {
   local error_message=$1
   local error_code=$2
 
-  # On appel la fonction pour l'écriture des logs au chaque message d'erreur
+  # On appel la fonction pour l'écriture des logs pour chaque message d'erreur
   write_log "ERREUR (${error_code}) : ${error_message}"
   echo -e "ERREUR (${error_code}) : ${error_message}"
 
