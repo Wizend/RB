@@ -5,7 +5,7 @@
 Les tests ont été effectué dans un conteneur Docker, je vais donc vous présenter comment le refaire. Mais toutes machines capable de comprendre le bash sera capable de lancer le script.
 
 1. Lancer une invite de commande
-2. Télécharger le dossier pour le script : `ssh git@github.com:Wizend/RB.git`
+2. Télécharger le dossier pour le script : `git clone git@github.com:Wizend/RB.git`
 3. Une fois téléchargé aller dans le repertoire de rb : `cd rb/`
 4. Lancer l'application Docker.
 5. Executer la commande suivante pour monter l'image : `docker rmi bash | docker build -t bash .`
